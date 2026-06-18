@@ -1,51 +1,51 @@
-# CI de Nível 01 - Disparo Manual através de clique
+#CI nivel 01 - disparo manual através de clique 
 
-# nome da pipeline
-name: 'N1 - Execução Manual'
+#declaração do nome da pipeline
+name: 'Execução Manual'
 
-# gatilhos / triggers - regras de disparo
-# gatilho manual = workflow_dispatch
+#gatilho ou triggers - regras de disparos
+#gatilho manual = workflow_dispatch
 
 on:
-  workflow_dispatch:
+  workflow_dispatch: 
 
-#tarefas dentro da pipeline = jobs
-
+#tarefas a serem executadas na pipeline - jobs
 jobs:
-  #nome do job
-  e2e-tests:
-    # maquina onde o job vai rodar
+
+#nome do job
+    e2e-tests:
+    #maquina onde o job vai rodar
     runs-on: ubuntu-latest
+        
 
-    # passos do job
-    steps:
-      # clone do projeto
-      - uses: actions/checkout@v4
+     steps: 
+          #clone do projeto
+          - uses: actions/checkout@v4
 
-      # instalção do node
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 24.x
+          #passo a passo do node 
+          - uses: actions/setup-node@v4
+            with:
+             node-version: 24.x
 
-      # instalação do Yarn
-      - name: Instalando Yarn
-        run: npm install -g yarn
+          #instalação do yarn 
+          - name: instalando Yarn 
+            run: npm install -g yarn 
 
-      #   instalação das dependências
-      - name: Instalando dependências
-        run: yarn
 
-      # instalação dos Browsers do Playwright
-      - name: Instalando Browsers do Playwright
-        run: yarn playwright install
+          #instalação das dependencias 
+          - name: instalando dependencias
+            run: yarn
 
-      # executar os testes e2e
-      - name: Executando testes e2e
-        run: yarn run e2e
+          # instalação o browser do Playwright 
+          - name: instalando o browser do Playwright 
+            run: yarn playwright install
 
-      - name: Salvando relatórios de testes
-        uses: actions/upload-artifact@v4
-        if: ${{ always() }}
-        with:
-          path: ./playwright-report
-          name: Relatório de Testes E2E
+          # execução dos testes e2e 
+          - name: Executando testes e2e 
+            run: yarn run e2e
+
+
+
+
+
+
